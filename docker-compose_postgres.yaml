@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  db:
+    container_name: pg_container_test_liquibase
+    image: postgres:13.5
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: testlb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-volume-testlb:/var/lib/postgresql/data/
+    networks:
+      my_custom_network:
+        ipv4_address: 172.28.0.7
+
+volumes:
+  postgres-volume-testlb:
+    external: true
+
+networks:
+  my_custom_network:
+    external: true
+

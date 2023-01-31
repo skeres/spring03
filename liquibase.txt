@@ -1,0 +1,53 @@
+Notes sur Liquibase
+
+
+
+
+
+
+
+
+
+
+implémentation
+- ajout de l'artifact liquibase-core dans le pom.xml
+- création d'un répertoire db/changelog pour les changelog dans le répertoire resources, pour y
+placer les fichiers d'update de database
+note : le fichier changelog peut aussi être spécifié dans le pom.xml
+<changelog-file>your/path/to/changelog.sql</changelog-file>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Questions Liquibase
+? User/password à utiliser pour les mises à jour du modèle de données. ? Admin ?
+? quelle implémentation pour utiliser liquibase sur nos bases projets sans modifier le process existant sur
+les environnements de pre-prod et prod ?
+? dans notre appli, le user/password BDD est dans le fichier "tda-data" et pas dans le fichier application.properties
+? spécifation de l'encoding/charset pour la database en cas d'upload de datas via csv ou autre ?
+? précision sur le schema à utiliser
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -2,8 +2,6 @@ package com.example.demo;
 
 import com.example.demo.entity.Etudiant;
 import com.example.demo.repository.IEtudiantRepository;
-import com.example.demo.service.EtudiantServiceImpl;
-import com.example.demo.service.IEtudiantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

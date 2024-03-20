@@ -27,6 +27,7 @@ public class ArchunitApplicationTests {
 
     @Test
     void servicesAndRepositoriesShouldNotDependOnWebLayer() {
+        String because="Service classes should only be accessed by controllers";
         noClasses()
                 .that().resideInAnyPackage("com.example.demo.service..")
                 .or().resideInAnyPackage("com.example.demo.repository..")
@@ -39,10 +40,11 @@ public class ArchunitApplicationTests {
 
     @Test
     void serviceClassesShouldOnlyBeAccessedByController() {
+        String because="Service classes should only be accessed by controllers";
         classes()
                 .that().resideInAPackage("..service..")
                 .should().onlyBeAccessed().byAnyPackage("..service..", "..controller..")
-                .because("Service classes should only be accesse by controllers")
+                .because(because)
                 .check(importedClasses);
     }
 
@@ -51,41 +53,54 @@ public class ArchunitApplicationTests {
 
     @Test
     void serviceClassesShouldBeNamedXServiceOrXComponentOrXServiceImpl() {
+        String because="Classes name in service package name must end with Service or ServiceImpl or Component";
         classes()
                 .that().resideInAPackage("..service..")
                 .should().haveSimpleNameEndingWith("Service")
                 .orShould().haveSimpleNameEndingWith("ServiceImpl")
                 .orShould().haveSimpleNameEndingWith("Component")
-                .because("Service classes name must follow rules")
+                .because(because)
                 .check(importedClasses);
     }
 
     @Test
     void repositoryClassesShouldBeNamedXRepository() {
+        String because="Classes name in repository package name must end with Repository";
         classes()
                 .that().resideInAPackage("..repository..")
                 .should().haveSimpleNameEndingWith("Repository")
+                .because(because)
                 .check(importedClasses);
     }
 
     @Test
     void controllerClassesShouldBeNamedXController() {
+        String because="Classes name in controller package name must end with Controller";
         classes()
                 .that().resideInAPackage("..controller..")
                 .should().haveSimpleNameEndingWith("Controller")
+                .because(because)
                 .check(importedClasses);
     }
 
 
     @Test
     void interfacesShouldNotHaveNamesEndingWithTheWordInterface() {
-        noClasses().that().areInterfaces().should().haveNameMatching("I*").check(importedClasses);
+        String because="interfaces should not have names ending with the word Interface";
+        noClasses()
+                .that().areInterfaces()
+                .should().haveSimpleNameEndingWith("Interface").check(importedClasses);
     }
 
     //enum classes
     @Test
     void enumClassesShouldResideInEnumPackage() {
-        classes().that().areEnums().should().resideInAPackage("..enum..");
+        String because="Classes ENUM should reside in enums package";
+        classes()
+                .that().areEnums()
+                .should().resideInAPackage("..enums..")
+                .because(because)
+                .check(importedClasses);
     }
 
     //Custom rules
